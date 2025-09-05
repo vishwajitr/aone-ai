@@ -1,0 +1,311 @@
+2025-09-04 23:29:24,368 - INFO - 🚀 Starting historical backtest for 2 days
+2025-09-04 23:29:24,368 - INFO - Fetching NIFTY data from 2025-09-02 to 2025-09-04
+2025-09-04 23:29:24,668 - ERROR - API Error: 404
+2025-09-04 23:29:24,668 - INFO - Using fallback data generation
+2025-09-04 23:29:24,826 - WARNING - VIX data not available, using estimates
+2025-09-04 23:29:24,827 - INFO - 📅 Processing 2025-09-02 - NIFTY: 24388.54, VIX: 15.00
+2025-09-04 23:29:24,828 - INFO -    📊 Observation: High=17105.32, Low=31643.49
+2025-09-04 23:29:24,828 - INFO -    🎯 Filters (2/3): Gap: 0.98%, VIX: 15.00
+2025-09-04 23:29:24,830 - INFO - 📅 Processing 2025-09-03 - NIFTY: 25118.01, VIX: 15.00
+2025-09-04 23:29:24,830 - INFO -    📊 Observation: High=17583.49, Low=32460.81
+2025-09-04 23:29:24,830 - INFO -    🎯 Filters (2/3): Gap: 0.21%, VIX: 15.00
+2025-09-04 23:30:13,686 - INFO - 🚀 Starting historical backtest for 30 days
+2025-09-04 23:30:13,688 - INFO - Fetching NIFTY data from 2025-08-05 to 2025-09-04
+2025-09-04 23:30:13,967 - ERROR - API Error: 404
+2025-09-04 23:30:13,967 - INFO - Using fallback data generation
+2025-09-04 23:30:14,209 - WARNING - VIX data not available, using estimates
+2025-09-04 23:30:14,212 - INFO - 📅 Processing 2025-08-05 - NIFTY: 24122.21, VIX: 15.00
+2025-09-04 23:30:14,212 - INFO -    📊 Observation: High=17035.21, Low=31332.13
+2025-09-04 23:30:14,212 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:30:14,212 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:30:14,212 - INFO - 📅 Processing 2025-08-06 - NIFTY: 24264.95, VIX: 15.00
+2025-09-04 23:30:14,213 - INFO -    📊 Observation: High=17016.65, Low=31347.01
+2025-09-04 23:30:14,213 - INFO -    🎯 Filters (2/3): Gap: 0.31%, VIX: 15.00
+2025-09-04 23:30:14,216 - INFO - 📅 Processing 2025-08-07 - NIFTY: 24433.16, VIX: 15.00
+2025-09-04 23:30:14,216 - INFO -    📊 Observation: High=17230.09, Low=31582.13
+2025-09-04 23:30:14,216 - INFO -    🎯 Filters (3/3): Gap: 0.50%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,218 - INFO - 📅 Processing 2025-08-08 - NIFTY: 24541.30, VIX: 15.00
+2025-09-04 23:30:14,218 - INFO -    📊 Observation: High=17193.95, Low=31884.60
+2025-09-04 23:30:14,218 - INFO -    🎯 Filters (2/3): Gap: 0.52%, VIX: 15.00
+2025-09-04 23:30:14,221 - INFO - 📅 Processing 2025-08-09 - NIFTY: 24712.60, VIX: 15.00
+2025-09-04 23:30:14,221 - INFO -    📊 Observation: High=17487.45, Low=32064.87
+2025-09-04 23:30:14,221 - INFO -    🎯 Filters (3/3): Gap: 0.21%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,223 - INFO - 📅 Processing 2025-08-10 - NIFTY: 24876.46, VIX: 15.00
+2025-09-04 23:30:14,223 - INFO -    📊 Observation: High=17452.25, Low=32121.91
+2025-09-04 23:30:14,224 - INFO -    🎯 Filters (2/3): Gap: 0.29%, VIX: 15.00
+2025-09-04 23:30:14,225 - INFO - 📅 Processing 2025-08-11 - NIFTY: 25036.55, VIX: 15.00
+2025-09-04 23:30:14,225 - INFO -    📊 Observation: High=17618.25, Low=32455.27
+2025-09-04 23:30:14,225 - INFO -    🎯 Filters (2/3): Gap: 0.33%, VIX: 15.00
+2025-09-04 23:30:14,227 - INFO - 📅 Processing 2025-08-12 - NIFTY: 25832.06, VIX: 15.00
+2025-09-04 23:30:14,227 - INFO -    📊 Observation: High=18092.62, Low=33101.39
+2025-09-04 23:30:14,228 - INFO -    🎯 Filters (3/3): Gap: 0.21%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,230 - INFO - 📅 Processing 2025-08-13 - NIFTY: 25665.54, VIX: 15.00
+2025-09-04 23:30:14,230 - INFO -    📊 Observation: High=17990.74, Low=33273.11
+2025-09-04 23:30:14,230 - INFO -    🎯 Filters (2/3): Gap: 0.39%, VIX: 15.00
+2025-09-04 23:30:14,232 - INFO - 📅 Processing 2025-08-14 - NIFTY: 25305.85, VIX: 15.00
+2025-09-04 23:30:14,232 - INFO -    📊 Observation: High=17841.54, Low=32736.99
+2025-09-04 23:30:14,232 - INFO -    🎯 Filters (3/3): Gap: 0.24%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,233 - INFO - 📅 Processing 2025-08-15 - NIFTY: 25353.94, VIX: 15.00
+2025-09-04 23:30:14,233 - INFO -    📊 Observation: High=17792.10, Low=32746.62
+2025-09-04 23:30:14,234 - INFO -    🎯 Filters (2/3): Gap: 0.50%, VIX: 15.00
+2025-09-04 23:30:14,235 - INFO - 📅 Processing 2025-08-16 - NIFTY: 25555.59, VIX: 15.00
+2025-09-04 23:30:14,235 - INFO -    📊 Observation: High=18032.42, Low=33149.58
+2025-09-04 23:30:14,235 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:30:14,237 - INFO - 📅 Processing 2025-08-17 - NIFTY: 25814.51, VIX: 15.00
+2025-09-04 23:30:14,237 - INFO -    📊 Observation: High=18075.14, Low=33439.84
+2025-09-04 23:30:14,237 - INFO -    🎯 Filters (2/3): Gap: 0.25%, VIX: 15.00
+2025-09-04 23:30:14,239 - INFO - 📅 Processing 2025-08-18 - NIFTY: 25324.49, VIX: 15.00
+2025-09-04 23:30:14,239 - INFO -    📊 Observation: High=17807.33, Low=32640.88
+2025-09-04 23:30:14,239 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:30:14,240 - INFO - 📅 Processing 2025-08-19 - NIFTY: 25283.15, VIX: 15.00
+2025-09-04 23:30:14,240 - INFO -    📊 Observation: High=17775.26, Low=32734.85
+2025-09-04 23:30:14,240 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:30:14,240 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:30:14,240 - INFO - 📅 Processing 2025-08-20 - NIFTY: 25399.63, VIX: 15.00
+2025-09-04 23:30:14,240 - INFO -    📊 Observation: High=17854.40, Low=32965.43
+2025-09-04 23:30:14,240 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:30:14,241 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:30:14,241 - INFO - 📅 Processing 2025-08-21 - NIFTY: 25912.51, VIX: 15.00
+2025-09-04 23:30:14,241 - INFO -    📊 Observation: High=18214.27, Low=33493.84
+2025-09-04 23:30:14,241 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:30:14,241 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:30:14,241 - INFO - 📅 Processing 2025-08-22 - NIFTY: 25946.22, VIX: 15.00
+2025-09-04 23:30:14,241 - INFO -    📊 Observation: High=18202.82, Low=33680.76
+2025-09-04 23:30:14,241 - INFO -    🎯 Filters (2/3): Gap: 0.24%, VIX: 15.00
+2025-09-04 23:30:14,242 - INFO - 📅 Processing 2025-08-23 - NIFTY: 26233.45, VIX: 15.00
+2025-09-04 23:30:14,242 - INFO -    📊 Observation: High=18370.85, Low=34080.43
+2025-09-04 23:30:14,242 - INFO -    🎯 Filters (2/3): Gap: 0.39%, VIX: 15.00
+2025-09-04 23:30:14,244 - INFO - 📅 Processing 2025-08-24 - NIFTY: 25645.63, VIX: 15.00
+2025-09-04 23:30:14,244 - INFO -    📊 Observation: High=18009.15, Low=33064.85
+2025-09-04 23:30:14,244 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:30:14,245 - INFO - 📅 Processing 2025-08-25 - NIFTY: 25693.49, VIX: 15.00
+2025-09-04 23:30:14,245 - INFO -    📊 Observation: High=17996.03, Low=33273.05
+2025-09-04 23:30:14,245 - INFO -    🎯 Filters (2/3): Gap: 0.49%, VIX: 15.00
+2025-09-04 23:30:14,246 - INFO - 📅 Processing 2025-08-26 - NIFTY: 26126.80, VIX: 15.00
+2025-09-04 23:30:14,247 - INFO -    📊 Observation: High=18318.58, Low=33597.71
+2025-09-04 23:30:14,247 - INFO -    🎯 Filters (3/3): Gap: 0.84%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,248 - INFO - 📅 Processing 2025-08-27 - NIFTY: 25655.37, VIX: 15.00
+2025-09-04 23:30:14,248 - INFO -    📊 Observation: High=18031.75, Low=33022.37
+2025-09-04 23:30:14,248 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:30:14,249 - INFO - 📅 Processing 2025-08-28 - NIFTY: 25523.71, VIX: 15.00
+2025-09-04 23:30:14,249 - INFO -    📊 Observation: High=17991.66, Low=32979.34
+2025-09-04 23:30:14,249 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:30:14,251 - INFO - 📅 Processing 2025-08-29 - NIFTY: 26289.89, VIX: 15.00
+2025-09-04 23:30:14,251 - INFO -    📊 Observation: High=18439.23, Low=33760.14
+2025-09-04 23:30:14,251 - INFO -    🎯 Filters (3/3): Gap: 0.46%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,252 - INFO - 📅 Processing 2025-08-30 - NIFTY: 26183.60, VIX: 15.00
+2025-09-04 23:30:14,252 - INFO -    📊 Observation: High=18477.80, Low=33972.30
+2025-09-04 23:30:14,252 - INFO -    🎯 Filters (3/3): Gap: 0.59%, VIX: 15.00, Good volume
+2025-09-04 23:30:14,254 - INFO - 📅 Processing 2025-08-31 - NIFTY: 26016.65, VIX: 15.00
+2025-09-04 23:30:14,254 - INFO -    📊 Observation: High=18238.75, Low=33811.37
+2025-09-04 23:30:14,254 - INFO -    🎯 Filters (2/3): Gap: 0.71%, VIX: 15.00
+2025-09-04 23:30:14,255 - INFO - 📅 Processing 2025-09-01 - NIFTY: 25811.73, VIX: 15.00
+2025-09-04 23:30:14,255 - INFO -    📊 Observation: High=18178.31, Low=33455.00
+2025-09-04 23:30:14,255 - INFO -    🎯 Filters (2/3): Gap: 0.37%, VIX: 15.00
+2025-09-04 23:30:14,256 - INFO - 📅 Processing 2025-09-02 - NIFTY: 26580.73, VIX: 15.00
+2025-09-04 23:30:14,256 - INFO -    📊 Observation: High=18729.34, Low=34435.62
+2025-09-04 23:30:14,256 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:30:14,258 - INFO - 📅 Processing 2025-09-03 - NIFTY: 25642.76, VIX: 15.00
+2025-09-04 23:30:14,258 - INFO -    📊 Observation: High=18037.81, Low=33213.73
+2025-09-04 23:30:14,258 - INFO -    🎯 Filters (2/3): Gap: 0.78%, VIX: 15.00
+2025-09-04 23:30:59,409 - INFO - Fetching NIFTY data from 2025-08-30 to 2025-09-04
+2025-09-04 23:30:59,606 - ERROR - API Error: 404
+2025-09-04 23:30:59,607 - INFO - Using fallback data generation
+2025-09-04 23:31:00,396 - WARNING - VIX data not available, using estimates
+2025-09-04 23:31:00,397 - INFO - 📅 Processing 2025-09-03 - NIFTY: 24731.59, VIX: 15.00
+2025-09-04 23:31:00,397 - INFO -    📊 Observation: High=17388.01, Low=32106.19
+2025-09-04 23:31:00,397 - INFO -    🎯 Filters (2/3): Gap: 0.30%, VIX: 15.00
+2025-09-04 23:31:48,597 - INFO - Fetching NIFTY data from 2025-08-30 to 2025-09-04
+2025-09-04 23:31:48,637 - ERROR - API Error: 404
+2025-09-04 23:31:48,637 - INFO - Using fallback data generation
+2025-09-04 23:33:27,060 - INFO - Fetching NIFTY data from 2025-08-25 to 2025-09-04
+2025-09-04 23:33:27,399 - ERROR - API Error: 404
+2025-09-04 23:33:27,400 - INFO - Using fallback data generation
+2025-09-04 23:33:27,561 - WARNING - VIX data not available, using estimates
+2025-09-04 23:33:27,562 - INFO - 📅 Processing 2025-08-25 - NIFTY: 24288.74, VIX: 15.00
+2025-09-04 23:33:27,562 - INFO -    📊 Observation: High=17117.09, Low=31538.24
+2025-09-04 23:33:27,562 - INFO -    🎯 Filters (2/3): Gap: 0.39%, VIX: 15.00
+2025-09-04 23:33:27,566 - INFO - 📅 Processing 2025-08-26 - NIFTY: 24457.78, VIX: 15.00
+2025-09-04 23:33:27,566 - INFO -    📊 Observation: High=17184.36, Low=31469.43
+2025-09-04 23:33:27,566 - INFO -    🎯 Filters (3/3): Gap: 0.59%, VIX: 15.00, Good volume
+2025-09-04 23:33:27,569 - INFO - 📅 Processing 2025-08-27 - NIFTY: 24427.53, VIX: 15.00
+2025-09-04 23:33:27,569 - INFO -    📊 Observation: High=17110.69, Low=31426.29
+2025-09-04 23:33:27,570 - INFO -    🎯 Filters (3/3): Gap: 0.30%, VIX: 15.00, Good volume
+2025-09-04 23:33:27,572 - INFO - 📅 Processing 2025-08-28 - NIFTY: 24651.15, VIX: 15.00
+2025-09-04 23:33:27,572 - INFO -    📊 Observation: High=17275.95, Low=31784.54
+2025-09-04 23:33:27,572 - INFO -    🎯 Filters (2/3): Gap: 0.24%, VIX: 15.00
+2025-09-04 23:33:27,574 - INFO - 📅 Processing 2025-08-29 - NIFTY: 24970.14, VIX: 15.00
+2025-09-04 23:33:27,574 - INFO -    📊 Observation: High=17506.05, Low=32232.22
+2025-09-04 23:33:27,574 - INFO -    🎯 Filters (2/3): Gap: 0.34%, VIX: 15.00
+2025-09-04 23:33:27,579 - INFO - Fetching NIFTY data from 2025-08-25 to 2025-09-04
+2025-09-04 23:33:27,614 - ERROR - API Error: 404
+2025-09-04 23:33:27,614 - INFO - Using fallback data generation
+2025-09-04 23:33:27,622 - WARNING - VIX data not available, using estimates
+2025-09-04 23:33:27,622 - INFO - 📅 Processing 2025-08-25 - NIFTY: 23790.11, VIX: 15.00
+2025-09-04 23:33:27,622 - INFO -    📊 Observation: High=16754.53, Low=30872.00
+2025-09-04 23:33:27,622 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:27,622 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:27,622 - INFO - 📅 Processing 2025-08-26 - NIFTY: 24154.70, VIX: 15.00
+2025-09-04 23:33:27,622 - INFO -    📊 Observation: High=17076.84, Low=31351.28
+2025-09-04 23:33:27,622 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:27,624 - INFO - 📅 Processing 2025-08-27 - NIFTY: 24386.67, VIX: 15.00
+2025-09-04 23:33:27,624 - INFO -    📊 Observation: High=17087.23, Low=31571.89
+2025-09-04 23:33:27,624 - INFO -    🎯 Filters (2/3): Gap: 0.20%, VIX: 15.00
+2025-09-04 23:33:27,625 - INFO - 📅 Processing 2025-08-28 - NIFTY: 24162.31, VIX: 15.00
+2025-09-04 23:33:27,625 - INFO -    📊 Observation: High=17115.00, Low=31299.93
+2025-09-04 23:33:27,625 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:27,627 - INFO - 📅 Processing 2025-08-29 - NIFTY: 24710.60, VIX: 15.00
+2025-09-04 23:33:27,627 - INFO -    📊 Observation: High=17339.34, Low=32054.20
+2025-09-04 23:33:27,627 - INFO -    🎯 Filters (2/3): Gap: 0.48%, VIX: 15.00
+2025-09-04 23:33:27,629 - INFO - Fetching NIFTY data from 2025-08-25 to 2025-09-04
+2025-09-04 23:33:27,659 - ERROR - API Error: 404
+2025-09-04 23:33:27,659 - INFO - Using fallback data generation
+2025-09-04 23:33:27,667 - WARNING - VIX data not available, using estimates
+2025-09-04 23:33:27,667 - INFO - 📅 Processing 2025-08-25 - NIFTY: 24288.86, VIX: 15.00
+2025-09-04 23:33:27,667 - INFO -    📊 Observation: High=17081.76, Low=31533.89
+2025-09-04 23:33:27,667 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:27,667 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:27,667 - INFO - 📅 Processing 2025-08-26 - NIFTY: 23834.89, VIX: 15.00
+2025-09-04 23:33:27,667 - INFO -    📊 Observation: High=16873.48, Low=30958.92
+2025-09-04 23:33:27,667 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:27,668 - INFO - 📅 Processing 2025-08-27 - NIFTY: 23495.42, VIX: 15.00
+2025-09-04 23:33:27,668 - INFO -    📊 Observation: High=16499.99, Low=30526.72
+2025-09-04 23:33:27,668 - INFO -    🎯 Filters (2/3): Gap: 0.41%, VIX: 15.00
+2025-09-04 23:33:27,670 - INFO - 📅 Processing 2025-08-28 - NIFTY: 23656.97, VIX: 15.00
+2025-09-04 23:33:27,670 - INFO -    📊 Observation: High=16700.02, Low=30713.39
+2025-09-04 23:33:27,670 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:27,670 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:27,670 - INFO - 📅 Processing 2025-08-29 - NIFTY: 23352.68, VIX: 15.00
+2025-09-04 23:33:27,670 - INFO -    📊 Observation: High=16439.05, Low=30352.64
+2025-09-04 23:33:27,670 - INFO -    🎯 Filters (2/3): Gap: 0.65%, VIX: 15.00
+2025-09-04 23:33:38,340 - INFO - 🚀 Starting historical backtest for 5 days
+2025-09-04 23:33:38,341 - INFO - Fetching NIFTY data from 2025-08-30 to 2025-09-04
+2025-09-04 23:33:38,390 - ERROR - API Error: 404
+2025-09-04 23:33:38,390 - INFO - Using fallback data generation
+2025-09-04 23:33:38,401 - WARNING - VIX data not available, using estimates
+2025-09-04 23:33:38,401 - INFO - 📅 Processing 2025-08-30 - NIFTY: 23911.55, VIX: 15.00
+2025-09-04 23:33:38,401 - INFO -    📊 Observation: High=16750.03, Low=30919.66
+2025-09-04 23:33:38,401 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:38,401 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:38,401 - INFO - 📅 Processing 2025-08-31 - NIFTY: 23659.56, VIX: 15.00
+2025-09-04 23:33:38,401 - INFO -    📊 Observation: High=16623.84, Low=30676.93
+2025-09-04 23:33:38,401 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:38,401 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:38,401 - INFO - 📅 Processing 2025-09-01 - NIFTY: 23760.17, VIX: 15.00
+2025-09-04 23:33:38,401 - INFO -    📊 Observation: High=16688.17, Low=30786.83
+2025-09-04 23:33:38,401 - INFO -    🎯 Filters (2/3): Gap: 0.72%, VIX: 15.00
+2025-09-04 23:33:38,403 - INFO - 📅 Processing 2025-09-02 - NIFTY: 23807.36, VIX: 15.00
+2025-09-04 23:33:38,403 - INFO -    📊 Observation: High=16709.32, Low=30856.98
+2025-09-04 23:33:38,403 - INFO -    🎯 Filters (2/3): Gap: 0.23%, VIX: 15.00
+2025-09-04 23:33:38,405 - INFO - 📅 Processing 2025-09-03 - NIFTY: 23955.56, VIX: 15.00
+2025-09-04 23:33:38,405 - INFO -    📊 Observation: High=16838.01, Low=30919.92
+2025-09-04 23:33:38,405 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:57,525 - INFO - 🚀 Starting historical backtest for 30 days
+2025-09-04 23:33:57,525 - INFO - Fetching NIFTY data from 2025-08-05 to 2025-09-04
+2025-09-04 23:33:57,570 - ERROR - API Error: 404
+2025-09-04 23:33:57,570 - INFO - Using fallback data generation
+2025-09-04 23:33:57,581 - WARNING - VIX data not available, using estimates
+2025-09-04 23:33:57,581 - INFO - 📅 Processing 2025-08-05 - NIFTY: 24192.99, VIX: 15.00
+2025-09-04 23:33:57,582 - INFO -    📊 Observation: High=17012.42, Low=31316.34
+2025-09-04 23:33:57,582 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,582 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,582 - INFO - 📅 Processing 2025-08-06 - NIFTY: 23732.07, VIX: 15.00
+2025-09-04 23:33:57,582 - INFO -    📊 Observation: High=16622.03, Low=30737.76
+2025-09-04 23:33:57,582 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,582 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,582 - INFO - 📅 Processing 2025-08-07 - NIFTY: 24057.82, VIX: 15.00
+2025-09-04 23:33:57,582 - INFO -    📊 Observation: High=16969.14, Low=31264.85
+2025-09-04 23:33:57,582 - INFO -    🎯 Filters (2/3): Gap: 0.25%, VIX: 15.00
+2025-09-04 23:33:57,583 - INFO - 📅 Processing 2025-08-08 - NIFTY: 23907.43, VIX: 15.00
+2025-09-04 23:33:57,583 - INFO -    📊 Observation: High=16810.00, Low=30975.42
+2025-09-04 23:33:57,583 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,583 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,583 - INFO - 📅 Processing 2025-08-09 - NIFTY: 23615.51, VIX: 15.00
+2025-09-04 23:33:57,583 - INFO -    📊 Observation: High=16609.21, Low=30447.44
+2025-09-04 23:33:57,584 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:57,585 - INFO - 📅 Processing 2025-08-10 - NIFTY: 23378.18, VIX: 15.00
+2025-09-04 23:33:57,585 - INFO -    📊 Observation: High=16454.58, Low=30283.31
+2025-09-04 23:33:57,585 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,585 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,585 - INFO - 📅 Processing 2025-08-11 - NIFTY: 22879.09, VIX: 15.00
+2025-09-04 23:33:57,585 - INFO -    📊 Observation: High=16037.86, Low=29656.15
+2025-09-04 23:33:57,585 - INFO -    🎯 Filters (2/3): Gap: 0.44%, VIX: 15.00
+2025-09-04 23:33:57,587 - INFO - 📅 Processing 2025-08-12 - NIFTY: 22918.16, VIX: 15.00
+2025-09-04 23:33:57,587 - INFO -    📊 Observation: High=16059.59, Low=29633.74
+2025-09-04 23:33:57,587 - INFO -    🎯 Filters (2/3): Gap: 0.25%, VIX: 15.00
+2025-09-04 23:33:57,588 - INFO - 📅 Processing 2025-08-13 - NIFTY: 23121.19, VIX: 15.00
+2025-09-04 23:33:57,588 - INFO -    📊 Observation: High=16215.60, Low=30017.27
+2025-09-04 23:33:57,588 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,588 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,589 - INFO - 📅 Processing 2025-08-14 - NIFTY: 23647.46, VIX: 15.00
+2025-09-04 23:33:57,589 - INFO -    📊 Observation: High=16700.49, Low=30661.18
+2025-09-04 23:33:57,589 - INFO -    🎯 Filters (3/3): Gap: 0.33%, VIX: 15.00, Good volume
+2025-09-04 23:33:57,590 - INFO - 📅 Processing 2025-08-15 - NIFTY: 23627.52, VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    📊 Observation: High=16625.63, Low=30689.53
+2025-09-04 23:33:57,590 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,590 - INFO - 📅 Processing 2025-08-16 - NIFTY: 23897.93, VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    📊 Observation: High=16793.55, Low=30962.71
+2025-09-04 23:33:57,590 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,590 - INFO - 📅 Processing 2025-08-17 - NIFTY: 23676.56, VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    📊 Observation: High=16621.13, Low=30724.33
+2025-09-04 23:33:57,590 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,590 - INFO - 📅 Processing 2025-08-18 - NIFTY: 23524.32, VIX: 15.00
+2025-09-04 23:33:57,590 - INFO -    📊 Observation: High=16582.51, Low=30387.44
+2025-09-04 23:33:57,590 - INFO -    🎯 Filters (3/3): Gap: 0.58%, VIX: 15.00, Good volume
+2025-09-04 23:33:57,592 - INFO - 📅 Processing 2025-08-19 - NIFTY: 23447.25, VIX: 15.00
+2025-09-04 23:33:57,592 - INFO -    📊 Observation: High=16566.52, Low=30436.67
+2025-09-04 23:33:57,592 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:57,593 - INFO - 📅 Processing 2025-08-20 - NIFTY: 23340.57, VIX: 15.00
+2025-09-04 23:33:57,593 - INFO -    📊 Observation: High=16461.90, Low=30313.36
+2025-09-04 23:33:57,593 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,593 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,593 - INFO - 📅 Processing 2025-08-21 - NIFTY: 23185.01, VIX: 15.00
+2025-09-04 23:33:57,593 - INFO -    📊 Observation: High=16308.49, Low=30051.38
+2025-09-04 23:33:57,593 - INFO -    🎯 Filters (2/3): Gap: 0.33%, VIX: 15.00
+2025-09-04 23:33:57,595 - INFO - 📅 Processing 2025-08-22 - NIFTY: 22969.86, VIX: 15.00
+2025-09-04 23:33:57,595 - INFO -    📊 Observation: High=16143.57, Low=29760.71
+2025-09-04 23:33:57,595 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,595 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,595 - INFO - 📅 Processing 2025-08-23 - NIFTY: 23342.13, VIX: 15.00
+2025-09-04 23:33:57,595 - INFO -    📊 Observation: High=16349.91, Low=30277.02
+2025-09-04 23:33:57,595 - INFO -    🎯 Filters (2/3): Gap: 0.57%, VIX: 15.00
+2025-09-04 23:33:57,596 - INFO - 📅 Processing 2025-08-24 - NIFTY: 23059.15, VIX: 15.00
+2025-09-04 23:33:57,596 - INFO -    📊 Observation: High=16150.81, Low=29931.63
+2025-09-04 23:33:57,596 - INFO -    🎯 Filters (2/3): Gap: 0.30%, VIX: 15.00
+2025-09-04 23:33:57,598 - INFO - 📅 Processing 2025-08-25 - NIFTY: 22691.93, VIX: 15.00
+2025-09-04 23:33:57,598 - INFO -    📊 Observation: High=16087.32, Low=29451.93
+2025-09-04 23:33:57,598 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:57,599 - INFO - 📅 Processing 2025-08-26 - NIFTY: 23013.93, VIX: 15.00
+2025-09-04 23:33:57,599 - INFO -    📊 Observation: High=16139.53, Low=29840.30
+2025-09-04 23:33:57,599 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,599 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,599 - INFO - 📅 Processing 2025-08-27 - NIFTY: 22637.88, VIX: 15.00
+2025-09-04 23:33:57,599 - INFO -    📊 Observation: High=15906.16, Low=29386.21
+2025-09-04 23:33:57,599 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,599 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,599 - INFO - 📅 Processing 2025-08-28 - NIFTY: 22802.76, VIX: 15.00
+2025-09-04 23:33:57,599 - INFO -    📊 Observation: High=16108.38, Low=29626.64
+2025-09-04 23:33:57,599 - INFO -    🎯 Filters (2/3): Gap: 0.26%, VIX: 15.00
+2025-09-04 23:33:57,600 - INFO - 📅 Processing 2025-08-29 - NIFTY: 22875.81, VIX: 15.00
+2025-09-04 23:33:57,600 - INFO -    📊 Observation: High=16092.34, Low=29663.23
+2025-09-04 23:33:57,600 - INFO -    🎯 Filters (2/3): Gap: 0.27%, VIX: 15.00
+2025-09-04 23:33:57,601 - INFO - 📅 Processing 2025-08-30 - NIFTY: 22816.51, VIX: 15.00
+2025-09-04 23:33:57,601 - INFO -    📊 Observation: High=16072.07, Low=29515.91
+2025-09-04 23:33:57,601 - INFO -    🎯 Filters (2/3): VIX: 15.00, Good volume
+2025-09-04 23:33:57,603 - INFO - 📅 Processing 2025-08-31 - NIFTY: 23304.38, VIX: 15.00
+2025-09-04 23:33:57,603 - INFO -    📊 Observation: High=16372.68, Low=30066.86
+2025-09-04 23:33:57,603 - INFO -    🎯 Filters (3/3): Gap: 0.29%, VIX: 15.00, Good volume
+2025-09-04 23:33:57,604 - INFO - 📅 Processing 2025-09-01 - NIFTY: 22997.83, VIX: 15.00
+2025-09-04 23:33:57,604 - INFO -    📊 Observation: High=16229.49, Low=29892.58
+2025-09-04 23:33:57,604 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,604 - INFO -    ❌ Filter score 1/3 - No trading
+2025-09-04 23:33:57,604 - INFO - 📅 Processing 2025-09-02 - NIFTY: 22471.50, VIX: 15.00
+2025-09-04 23:33:57,604 - INFO -    📊 Observation: High=15750.80, Low=29140.00
+2025-09-04 23:33:57,604 - INFO -    🎯 Filters (2/3): Gap: 0.30%, VIX: 15.00
+2025-09-04 23:33:57,605 - INFO - 📅 Processing 2025-09-03 - NIFTY: 22391.99, VIX: 15.00
+2025-09-04 23:33:57,605 - INFO -    📊 Observation: High=15756.77, Low=29002.90
+2025-09-04 23:33:57,605 - INFO -    🎯 Filters (1/3): VIX: 15.00
+2025-09-04 23:33:57,605 - INFO -    ❌ Filter score 1/3 - No trading

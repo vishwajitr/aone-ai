@@ -1,0 +1,30 @@
+2025-09-04 22:50:58,565 - Agent.DatabaseAgent - INFO - [DatabaseAgent] Database initialized successfully
+2025-09-04 22:50:58,565 - __main__ - INFO - All agents initialized successfully
+2025-09-04 22:50:58,565 - __main__ - INFO - [AgenticTrader] Agentic Options Trader initialized
+2025-09-04 22:50:58,565 - __main__ - INFO - [AgenticTrader] Starting Agentic Options Trading Strategy
+2025-09-04 22:50:58,565 - __main__ - ERROR - Login error: name 'pyotp' is not defined
+2025-09-04 22:50:58,566 - __main__ - ERROR - [AgenticTrader] Failed to login to Angel One. Exiting.
+2025-09-04 22:51:21,513 - Agent.DatabaseAgent - INFO - [DatabaseAgent] Database initialized successfully
+2025-09-04 22:51:21,513 - __main__ - INFO - All agents initialized successfully
+2025-09-04 22:51:21,514 - __main__ - INFO - [AgenticTrader] Agentic Options Trader initialized
+2025-09-04 22:51:21,514 - __main__ - INFO - [AgenticTrader] Starting Agentic Options Trading Strategy
+2025-09-04 22:51:21,514 - __main__ - ERROR - Login error: name 'pyotp' is not defined
+2025-09-04 22:51:21,514 - __main__ - ERROR - [AgenticTrader] Failed to login to Angel One. Exiting.
+2025-09-04 22:52:17,911 - Agent.DatabaseAgent - INFO - [DatabaseAgent] Database initialized successfully
+2025-09-04 22:52:17,911 - __main__ - INFO - All agents initialized successfully
+2025-09-04 22:52:17,911 - __main__ - INFO - [AgenticTrader] Agentic Options Trader initialized
+2025-09-04 22:52:17,911 - __main__ - INFO - [AgenticTrader] Starting Agentic Options Trading Strategy
+2025-09-04 22:52:17,911 - __main__ - ERROR - Login error: name 'pyotp' is not defined
+2025-09-04 22:52:17,911 - __main__ - ERROR - [AgenticTrader] Failed to login to Angel One. Exiting.
+2025-09-04 22:56:41,082 - Agent.DatabaseAgent - INFO - [DatabaseAgent] Database initialized successfully
+2025-09-04 22:56:41,083 - __main__ - INFO - All agents initialized successfully
+2025-09-04 22:56:41,083 - __main__ - INFO - [AgenticTrader] Agentic Options Trader initialized
+2025-09-04 22:56:41,083 - __main__ - INFO - [AgenticTrader] Starting Agentic Options Trading Strategy
+2025-09-04 22:56:41,083 - __main__ - ERROR - Login error: name 'pyotp' is not defined
+2025-09-04 22:56:41,083 - __main__ - ERROR - [AgenticTrader] Failed to login to Angel One. Exiting.
+2025-09-04 22:57:11,297 - Agent.DatabaseAgent - INFO - [DatabaseAgent] Database initialized successfully
+2025-09-04 22:57:11,298 - __main__ - INFO - All agents initialized successfully
+2025-09-04 22:57:11,298 - __main__ - INFO - [AgenticTrader] Agentic Options Trader initialized
+2025-09-04 22:57:11,298 - __main__ - INFO - [AgenticTrader] Starting Agentic Options Trading Strategy
+2025-09-04 22:57:11,298 - __main__ - ERROR - Login error: name 'pyotp' is not defined
+2025-09-04 22:57:11,298 - __main__ - ERROR - [AgenticTrader] Failed to login to Angel One. Exiting.
