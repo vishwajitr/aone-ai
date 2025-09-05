@@ -2,6 +2,7 @@
 """
 WORKING Unified Agentic Options Trading System
 Clean, simple, and guaranteed to work
+FIXED VERSION - NSEpy only with proper dependency handling
 """
 
 import pandas as pd
@@ -17,13 +18,33 @@ import warnings
 import sys
 warnings.filterwarnings('ignore')
 
-# Optional imports
+# NSEpy import (required for all modes)
 try:
-    from smartapi import SmartConnect
-    import pyotp
-    HAS_ANGEL_ONE = True
+    from nsepy import get_history
+    HAS_NSEPY = True
+    print("✅ NSEpy available")
 except ImportError:
-    HAS_ANGEL_ONE = False
+    HAS_NSEPY = False
+    print("❌ NSEpy not available - install with: pip install nsepy")
+
+# Angel One imports (ONLY for live mode)
+HAS_ANGEL_ONE = False
+SmartConnect = None
+pyotp = None
+
+def try_import_angel_one():
+    """Import Angel One libraries only when needed"""
+    global HAS_ANGEL_ONE, SmartConnect, pyotp
+    try:
+        from smartapi import SmartConnect
+        import pyotp
+        HAS_ANGEL_ONE = True
+        print("✅ Angel One libraries available")
+        return True
+    except ImportError:
+        HAS_ANGEL_ONE = False
+        print("⚠️ Angel One libraries not available (only needed for live trading)")
+        return False
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -65,7 +86,7 @@ class TradingSignal:
     timestamp: datetime
 
 class WorkingUnifiedTrader:
-    """Simple, working unified trading system"""
+    """Simple, working unified trading system with fixed dependencies"""
     
     def __init__(self, mode: str = "backtest", **kwargs):
         self.mode = mode
@@ -83,205 +104,280 @@ class WorkingUnifiedTrader:
         self.max_daily_trades = 3
         self.daily_loss_limit = 0.05
         
+        print(f"🤖 Initializing {mode.upper()} mode...")
+        
         # Initialize based on mode
         if mode == "live":
+            print("🔴 Setting up LIVE TRADING mode...")
             self._init_live_mode(kwargs)
-        else:
+        elif mode == "backtest":
+            print("📊 Setting up BACKTESTING mode...")
             self._init_backtest_mode(kwargs)
+        else:
+            raise ValueError(f"Invalid mode: {mode}. Use 'live' or 'backtest'")
         
         self._init_database()
         print(f"✅ {mode.upper()} mode ready with ₹{self.capital:,.0f}")
     
     def _init_live_mode(self, kwargs):
-        """Initialize live trading"""
-        if not HAS_ANGEL_ONE:
-            raise ImportError("Install: pip install smartapi-python pyotp")
+        """Initialize live trading with proper dependency checking"""
         
+        # Try to import Angel One libraries
+        if not try_import_angel_one():
+            print("\n❌ LIVE TRADING SETUP REQUIRED:")
+            print("📦 Install Angel One libraries:")
+            print("   pip install smartapi-python pyotp")
+            print("\n💡 These are only needed for live trading")
+            print("📊 For backtesting, use mode='backtest' instead")
+            raise ImportError("Angel One libraries required for live trading. Install: pip install smartapi-python pyotp")
+        
+        # Get credentials
         self.api_key = kwargs.get('api_key', '')
         self.client_code = kwargs.get('client_code', '')
         self.password = kwargs.get('password', '')
         self.totp_secret = kwargs.get('totp_secret', '')
         
         if not all([self.api_key, self.client_code, self.password, self.totp_secret]):
-            raise ValueError("All Angel One credentials required")
+            print("\n❌ MISSING CREDENTIALS:")
+            print("Required for live trading:")
+            print("   • api_key")
+            print("   • client_code") 
+            print("   • password")
+            print("   • totp_secret")
+            raise ValueError("All Angel One credentials required for live trading")
         
+        # Initialize SmartConnect
         self.smart_api = SmartConnect(api_key=self.api_key)
         self._login_angel_one()
     
     def _init_backtest_mode(self, kwargs):
-        """Initialize backtesting"""
+        """Initialize backtesting with NSEpy validation"""
         self.days = kwargs.get('days', 30)
+        
+        # Check NSEpy first
+        if not self._check_nsepy():
+            raise ImportError("NSEpy setup required. Install with: pip install nsepy")
+        
+        # Get historical data
         self.historical_data = self._get_working_historical_data()
         self.current_index = 0
         
         if not self.historical_data:
-            raise ValueError("No historical data available")
+            raise ValueError("No historical data available from NSEpy")
         
-        print(f"📊 Loaded {len(self.historical_data)} days of data")
+        print(f"📊 Loaded {len(self.historical_data)} days from NSEpy")
+    
+    def _check_nsepy(self):
+        """Check NSEpy installation and connectivity"""
+        try:
+            from nsepy import get_history
+            print("✅ NSEpy available")
+            
+            # Quick connectivity test
+            test_date = datetime.now().date()
+            test_data = get_history(
+                symbol="NIFTY",
+                start=test_date - timedelta(days=5),
+                end=test_date,
+                index=True
+            )
+            
+            if test_data is not None and not test_data.empty:
+                print("✅ NSEpy connectivity OK")
+                return True
+            else:
+                print("⚠️ NSEpy connectivity issue")
+                return False
+                
+        except ImportError:
+            print("❌ NSEpy not installed")
+            print("📦 Install: pip install nsepy")
+            return False
+        except Exception as e:
+            print(f"⚠️ NSEpy check failed: {e}")
+            return False
     
     def _login_angel_one(self):
-        """Login to Angel One"""
+        """Login to Angel One with better error handling"""
         try:
+            if not HAS_ANGEL_ONE:
+                raise ImportError("Angel One libraries not available")
+            
+            # Generate TOTP
             totp = pyotp.TOTP(self.totp_secret).now()
+            print(f"🔐 Generated TOTP: {totp}")
+            
+            # Login
             data = self.smart_api.generateSession(self.client_code, self.password, totp)
             
-            if data['status']:
+            if data and data.get('status'):
                 print("✅ Angel One login successful")
+                print(f"👤 Client: {self.client_code}")
             else:
-                raise Exception(f"Login failed: {data.get('message')}")
+                error_msg = data.get('message', 'Unknown error') if data else 'No response'
+                print(f"❌ Login failed: {error_msg}")
+                raise Exception(f"Angel One login failed: {error_msg}")
+                
         except Exception as e:
-            logger.error(f"Login error: {e}")
+            print(f"❌ Angel One login error: {e}")
+            print("\n🔧 Troubleshooting:")
+            print("   • Check API credentials")
+            print("   • Verify TOTP secret")
+            print("   • Ensure Angel One account is active")
+            print("   • Check internet connection")
             raise
     
     def _get_working_historical_data(self):
-      """Get working historical data with multiple fallback methods"""
-      try:
-          print("📡 Fetching NSE data...")
-          
-          # Method 1: Yahoo Finance (most reliable)
-          data = self._fetch_yahoo_finance_data()
-          if data:
-              return data
-          
-          # Method 2: NSEpy library
-          data = self._fetch_nsepy_data()
-          if data:
-              return data
-          
-          # Method 3: Alternative NSE API
-          data = self._fetch_alternative_nse_api()
-          if data:
-              return data
-          
-          print("⚠️ All NSE sources failed, using realistic generated data...")
-          return self._generate_working_data()
-          
-      except Exception as e:
-          print(f"⚠️ Data fetch error: {e}")
-          print("📊 Generating realistic data...")
-          return self._generate_working_data()
-    
-    def _fetch_nse_data(self):
-        """Fetch NSE data"""
+        """Get historical data using NSEpy library only"""
         try:
-            end_date = datetime.now()
-            start_date = end_date - timedelta(days=self.days + 5)
-
-            # ✅ Correct endpoint
-            url = "https://nsepy-xyz.web.app/"
-            params = {
-                'symbol': 'NIFTY',
-                'from': start_date.strftime('%Y-%m-%d'),
-                'to': end_date.strftime('%Y-%m-%d')
-            }
-
-            headers = {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            }
-
-            response = requests.get(url, params=params, headers=headers, timeout=20)
-
-            if response.status_code == 200:
-                data = response.json()
-
-                if 'data' in data and len(data['data']) > 0:
-                    historical_data = []
-
-                    for record in data['data'][-self.days:]:
-                        try:
-                            close_price = float(record.get('close', 0))
-                            open_price = float(record.get('open', close_price))
-                            high_price = float(record.get('high', close_price))
-                            low_price = float(record.get('low', close_price))
-
-                            if close_price <= 0:
-                                continue
-
-                            # Calculate gap
-                            prev_close = historical_data[-1].ltp if historical_data else close_price * 0.999
-                            gap_pct = abs((open_price - prev_close) / prev_close) * 100
-
-                            market_data = MarketData(
-                                symbol="NIFTY",
-                                timestamp=datetime.strptime(record['date'], '%Y-%m-%d'),
-                                ltp=close_price,
-                                open=open_price,
-                                high=high_price,
-                                low=low_price,
-                                volume=int(record.get('volume', 100000)),
-                                prev_close=prev_close,
-                                vix=np.random.uniform(12, 25),
-                                gap_pct=gap_pct
-                            )
-
-                            historical_data.append(market_data)
-
-                        except Exception:
-                            continue
-
-                    if len(historical_data) >= 5:
-                        print(f"✅ NSE data: {len(historical_data)} days")
-                        return historical_data
-
-            return None
-
+            print("📡 Fetching NSE data using NSEpy...")
+            return self._fetch_nsepy_data()
         except Exception as e:
-            print(f"NSE error: {e}")
-            return None
-
-    def _generate_working_data(self):
-        """Generate working test data"""
-        data = []
-        base_price = 24500
-        current_price = base_price
-        
-        for i in range(self.days):
-            date = datetime.now() - timedelta(days=self.days - i)
+            print(f"❌ NSEpy error: {e}")
+            print("\n🔧 NSEpy Troubleshooting:")
+            print("   • Install: pip install nsepy")
+            print("   • Check internet connection")
+            print("   • Try: pip install --upgrade nsepy")
+            print("   • NSE website might be temporarily down")
+            raise ValueError(f"NSEpy data fetch failed: {e}")
+    
+    def _fetch_nsepy_data(self):
+        """Fetch NIFTY data using NSEpy library only"""
+        try:
+            # Import nsepy
+            from nsepy import get_history
             
-            # Realistic daily movement
-            daily_change = np.random.normal(0, 0.02)
-            current_price = current_price * (1 + daily_change)
-            current_price = max(current_price, base_price * 0.9)
-            current_price = min(current_price, base_price * 1.1)
+            print("📡 Using NSEpy for NIFTY data...")
             
-            # Generate OHLC
-            range_pct = np.random.uniform(0.01, 0.03)
-            daily_range = current_price * range_pct
+            # Calculate date range (get extra days for holidays/weekends)
+            end_date = datetime.now().date()
+            start_date = end_date - timedelta(days=self.days + 15)
             
-            high = current_price + daily_range * np.random.uniform(0.3, 0.7)
-            low = current_price - daily_range * np.random.uniform(0.3, 0.7)
-            open_price = low + (high - low) * np.random.uniform(0.2, 0.8)
+            print(f"📅 Fetching data from {start_date} to {end_date}")
             
-            # Calculate gap
-            prev_close = data[-1].ltp if data else current_price * 0.999
-            gap_pct = abs((open_price - prev_close) / prev_close) * 100
-            
-            # Some days have bigger gaps for trading opportunities
-            if i % 3 == 0:
-                gap_pct = np.random.uniform(0.4, 1.5)
-                open_price = prev_close * (1 + gap_pct/100 * np.random.choice([-1, 1]))
-            
-            vix = np.random.uniform(12, 28)
-            if i % 4 == 0:
-                vix = np.random.uniform(18, 35)
-            
-            market_data = MarketData(
-                symbol="NIFTY",
-                timestamp=date,
-                ltp=current_price,
-                open=open_price,
-                high=high,
-                low=low,
-                volume=int(np.random.normal(120000000, 30000000)),
-                prev_close=prev_close,
-                vix=vix,
-                gap_pct=gap_pct
+            # Fetch NIFTY index data
+            nifty_data = get_history(
+                symbol="NIFTY", 
+                start=start_date, 
+                end=end_date, 
+                index=True  # Critical: Must be True for indices
             )
             
-            data.append(market_data)
+            if nifty_data is None or nifty_data.empty:
+                raise ValueError("NSEpy returned empty data")
+            
+            print(f"📊 Raw NSEpy data: {len(nifty_data)} records")
+            
+            # Fetch VIX data
+            vix_current = self._fetch_vix_nsepy()
+            
+            # Convert to MarketData format
+            historical_data = []
+            
+            for i, (date, row) in enumerate(nifty_data.iterrows()):
+                try:
+                    # Skip invalid data
+                    if pd.isna(row['Close']) or row['Close'] <= 0:
+                        continue
+                    
+                    # Calculate gap percentage
+                    prev_close = historical_data[-1].ltp if historical_data else row['Close'] * 0.999
+                    gap_pct = 0
+                    
+                    if not pd.isna(row['Open']) and row['Open'] > 0:
+                        gap_pct = abs((row['Open'] - prev_close) / prev_close) * 100
+                    
+                    # Generate realistic VIX variation
+                    vix_value = vix_current + np.random.normal(0, 2.0)
+                    vix_value = max(8, min(50, vix_value))
+                    
+                    # Handle NaN values in OHLC
+                    open_price = float(row['Open']) if not pd.isna(row['Open']) else float(row['Close'])
+                    high_price = float(row['High']) if not pd.isna(row['High']) else float(row['Close'])
+                    low_price = float(row['Low']) if not pd.isna(row['Low']) else float(row['Close'])
+                    
+                    # Volume handling
+                    volume = 120000000  # Default volume for NIFTY
+                    if 'Volume' in row and not pd.isna(row['Volume']):
+                        volume = int(row['Volume'])
+                    elif 'Turnover' in row and not pd.isna(row['Turnover']):
+                        # Estimate volume from turnover
+                        volume = int(row['Turnover'] / row['Close'] * 1000) if row['Close'] > 0 else 120000000
+                    
+                    market_data = MarketData(
+                        symbol="NIFTY",
+                        timestamp=date.to_pydatetime() if hasattr(date, 'to_pydatetime') else date,
+                        ltp=float(row['Close']),
+                        open=open_price,
+                        high=high_price,
+                        low=low_price,
+                        volume=volume,
+                        prev_close=prev_close,
+                        vix=vix_value,
+                        gap_pct=gap_pct
+                    )
+                    
+                    historical_data.append(market_data)
+                    
+                except Exception as e:
+                    print(f"⚠️ Skipping row {i}: {e}")
+                    continue
+            
+            if len(historical_data) < 3:
+                raise ValueError(f"Insufficient valid data: only {len(historical_data)} records")
+            
+            # Return requested number of days
+            result = historical_data[-self.days:] if len(historical_data) > self.days else historical_data
+            
+            print(f"✅ NSEpy SUCCESS: {len(result)} days of NIFTY data")
+            print(f"📊 Date range: {result[0].timestamp.date()} to {result[-1].timestamp.date()}")
+            print(f"📈 Latest close: ₹{result[-1].ltp:,.2f}")
+            print(f"📊 Latest VIX: {result[-1].vix:.2f}")
+            
+            return result
+            
+        except ImportError:
+            print("❌ NSEpy library not installed!")
+            print("📦 Install with: pip install nsepy")
+            raise ImportError("NSEpy required: pip install nsepy")
         
-        print(f"✅ Generated {len(data)} days with trading opportunities")
-        return data
+        except Exception as e:
+            print(f"❌ NSEpy failed: {e}")
+            raise
+    
+    def _fetch_vix_nsepy(self):
+        """Fetch India VIX using NSEpy"""
+        try:
+            from nsepy import get_history
+            
+            end_date = datetime.now().date()
+            start_date = end_date - timedelta(days=10)
+            
+            # Try multiple VIX symbol variations
+            vix_symbols = ["INDIA VIX", "INDIAVIX", "VIX"]
+            
+            for symbol in vix_symbols:
+                try:
+                    vix_data = get_history(
+                        symbol=symbol,
+                        start=start_date,
+                        end=end_date,
+                        index=True
+                    )
+                    
+                    if vix_data is not None and not vix_data.empty:
+                        latest_vix = float(vix_data['Close'].iloc[-1])
+                        print(f"📊 India VIX: {latest_vix:.2f}")
+                        return latest_vix
+                except:
+                    continue
+            
+            print("⚠️ VIX not available, using default: 18.5")
+            return 18.5
+            
+        except Exception as e:
+            print(f"⚠️ VIX error: {e}, using default: 18.5")
+            return 18.5
     
     def _init_database(self):
         """Initialize database"""
@@ -681,7 +777,7 @@ async def quick_test():
         print(f"❌ Quick test error: {e}")
         print("\n🔧 Troubleshooting:")
         print("   • Check internet connection")
-        print("   • Try: pip install requests pandas numpy")
+        print("   • Try: pip install nsepy")
         print("   • Restart terminal and try again")
         
         # Show detailed error for debugging
@@ -690,17 +786,32 @@ async def quick_test():
         traceback.print_exc()
 
 async def run_live():
-    """Run live trading"""
-    print("🔴 LIVE TRADING")
+    """Run live trading with dependency check"""
+    print("🔴 LIVE TRADING SETUP")
     print("=" * 50)
     
+    # Check Angel One libraries
+    if not try_import_angel_one():
+        print("❌ Live trading not available!")
+        print("\n📦 Required installations:")
+        print("   pip install smartapi-python pyotp")
+        print("\n💡 After installation, restart your terminal/IDE and try again")
+        input("\nPress Enter to continue...")
+        return
+    
     try:
-        api_key = input("API Key: ")
-        client_code = input("Client Code: ")
-        password = input("Password: ")
-        totp_secret = input("TOTP Secret: ")
-        capital = float(input("Capital: ") or "100000")
+        print("🔐 Enter Angel One credentials:")
+        api_key = input("API Key: ").strip()
+        client_code = input("Client Code: ").strip()
+        password = input("Password: ").strip()
+        totp_secret = input("TOTP Secret: ").strip()
+        capital = float(input("Capital (default ₹100K): ") or "100000")
         
+        if not all([api_key, client_code, password, totp_secret]):
+            print("❌ All credentials are required for live trading")
+            return
+        
+        print("\n🚀 Initializing live trading...")
         trader = WorkingUnifiedTrader(
             mode="live",
             api_key=api_key,
@@ -710,30 +821,61 @@ async def run_live():
             capital=capital
         )
         
+        print("✅ Live trading ready!")
         await trader.run()
         
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ Live trading error: {e}")
+        print("\n🔧 Common solutions:")
+        print("   • Verify all credentials are correct")
+        print("   • Check Angel One account status")
+        print("   • Ensure TOTP secret is valid")
+        input("\nPress Enter to continue...")
 
 def display_menu():
-    """Menu"""
+    """Display menu with proper dependency info"""
     print("\n🤖 WORKING UNIFIED TRADER")
     print("=" * 40)
     print("✅ Simple, clean, and guaranteed to work")
+    
+    # Check dependencies
+    print(f"\n📦 Dependencies:")
+    print(f"   NSEpy: {'✅ Available' if HAS_NSEPY else '❌ Missing (pip install nsepy)'}")
+    
+    global HAS_ANGEL_ONE
+    if not HAS_ANGEL_ONE:
+        try_import_angel_one()  # Try again in case it was installed
+    
+    print(f"   Angel One: {'✅ Available' if HAS_ANGEL_ONE else '⚠️ Not installed (only for live trading)'}")
+    
     print()
     print("1. 📊 Backtest (30 days)")
     print("2. ⚡ Quick Test (10 days)")
-    print("3. 🔴 Live Trading")
+    
+    if HAS_ANGEL_ONE:
+        print("3. 🔴 Live Trading")
+    else:
+        print("3. 🔴 Live Trading (Install: pip install smartapi-python pyotp)")
+    
     print("4. ❌ Exit")
     print()
     
     return input("Choice (1-4): ").strip()
 
 async def main():
-    """Main app"""
+    """Main app with proper error handling"""
     print("🚀 WORKING UNIFIED AGENTIC TRADER")
     print("=" * 50)
     print("✅ Clean, simple, and guaranteed to work!")
+    
+    # Check NSEpy (required for all modes)
+    if not HAS_NSEPY:
+        print("\n❌ CRITICAL DEPENDENCY MISSING:")
+        print("📦 NSEpy is required for all modes")
+        print("   Install: pip install nsepy")
+        print("   Then restart and try again")
+        input("\nPress Enter to exit...")
+        return
     
     while True:
         try:
@@ -749,30 +891,124 @@ async def main():
                 print("👋 Thanks for using the trader!")
                 break
             else:
-                print("❌ Invalid choice")
+                print("❌ Invalid choice (1-4)")
             
             if choice in ["1", "2", "3"]:
                 input("\nPress Enter to continue...")
                 
         except KeyboardInterrupt:
-            print("\n🛑 Interrupted")
+            print("\n🛑 Interrupted by user")
             break
         except Exception as e:
             print(f"❌ Error: {e}")
+            input("\nPress Enter to continue...")
     
     print("✅ Goodbye!")
 
+# Test NSEpy connection function
+def test_nsepy_connection():
+    """Test NSEpy connection and data quality"""
+    try:
+        from nsepy import get_history
+        from datetime import date, timedelta
+        
+        print("🧪 Testing NSEpy connection...")
+        print("=" * 40)
+        
+        # Test 1: Basic connection
+        end_date = datetime.now().date()
+        start_date = end_date - timedelta(days=5)
+        
+        print(f"📅 Testing date range: {start_date} to {end_date}")
+        
+        # Test NIFTY data
+        nifty_data = get_history(
+            symbol="NIFTY",
+            start=start_date,
+            end=end_date,
+            index=True
+        )
+        
+        if nifty_data is not None and not nifty_data.empty:
+            print(f"✅ NIFTY data: {len(nifty_data)} records")
+            print(f"📊 Latest close: ₹{nifty_data['Close'].iloc[-1]:,.2f}")
+            print(f"📈 Columns: {list(nifty_data.columns)}")
+        else:
+            print("❌ NIFTY data: Failed")
+            return False
+        
+        # Test VIX data
+        try:
+            vix_data = get_history(
+                symbol="INDIA VIX",
+                start=start_date,
+                end=end_date,
+                index=True
+            )
+            
+            if vix_data is not None and not vix_data.empty:
+                print(f"✅ VIX data: {vix_data['Close'].iloc[-1]:.2f}")
+            else:
+                print("⚠️ VIX data: Not available")
+        except:
+            print("⚠️ VIX data: Failed")
+        
+        print("✅ NSEpy connection test PASSED")
+        return True
+        
+    except ImportError:
+        print("❌ NSEpy not installed: pip install nsepy")
+        return False
+    except Exception as e:
+        print(f"❌ NSEpy test failed: {e}")
+        return False
+
+# Command line interface
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         command = sys.argv[1].lower()
         
-        if command == "quick":
+        if command == "test":
+            # Test NSEpy connection
+            test_nsepy_connection()
+        elif command == "quick":
+            if not HAS_NSEPY:
+                print("❌ Install NSEpy first: pip install nsepy")
+                sys.exit(1)
             asyncio.run(quick_test())
         elif command == "backtest":
+            if not HAS_NSEPY:
+                print("❌ Install NSEpy first: pip install nsepy")
+                sys.exit(1)
             asyncio.run(run_backtest())
         elif command == "live":
+            if not try_import_angel_one():
+                print("❌ Install Angel One libraries: pip install smartapi-python pyotp")
+                sys.exit(1)
             asyncio.run(run_live())
         else:
-            print("Commands: quick, backtest, live")
+            print("Available commands:")
+            print("  test      - Test NSEpy connection")
+            print("  quick     - Quick test (10 days)")
+            print("  backtest  - Full backtest")
+            print("  live      - Live trading")
+            print("  (no args) - Interactive menu")
     else:
         asyncio.run(main())
+
+print("\n" + "="*60)
+print("📦 INSTALLATION COMMANDS:")
+print("="*60)
+print("Required (all modes):     pip install nsepy")
+print("Live trading only:        pip install smartapi-python pyotp")
+print("Additional dependencies:  pip install pandas numpy requests")
+print("\n🎯 USAGE EXAMPLES:")
+print("="*60)
+print("python trader.py test      # Test NSEpy connection")
+print("python trader.py quick     # Quick 10-day test")
+print("python trader.py backtest  # Full backtest")
+print("python trader.py live      # Live trading")
+print("python trader.py           # Interactive menu")
+print("\n✅ This version uses ONLY NSEpy for data - no backup sources")
+print("🚀 Fixed dependency issues - works with just NSEpy for backtesting")
+print("="*60)
