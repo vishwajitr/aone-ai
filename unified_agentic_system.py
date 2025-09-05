@@ -17,6 +17,18 @@ from dataclasses import dataclass
 import warnings
 import sys
 warnings.filterwarnings('ignore')
+import pyotp
+try:
+    from smartapi import SmartConnect  # pip package: smartapi_python
+except Exception:  # ImportError, ModuleNotFoundError
+    # Fallback to local package in this repo
+    import os, sys
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
+    from SmartApi import SmartConnect
+
 
 # NSEpy import (required for all modes)
 try:
@@ -27,24 +39,6 @@ except ImportError:
     HAS_NSEPY = False
     print("❌ NSEpy not available - install with: pip install nsepy")
 
-# Angel One imports (ONLY for live mode)
-HAS_ANGEL_ONE = False
-SmartConnect = None
-pyotp = None
-
-def try_import_angel_one():
-    """Import Angel One libraries only when needed"""
-    global HAS_ANGEL_ONE, SmartConnect, pyotp
-    try:
-        from smartapi import SmartConnect
-        import pyotp
-        HAS_ANGEL_ONE = True
-        print("✅ Angel One libraries available")
-        return True
-    except ImportError:
-        HAS_ANGEL_ONE = False
-        print("⚠️ Angel One libraries not available (only needed for live trading)")
-        return False
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -122,15 +116,7 @@ class WorkingUnifiedTrader:
     def _init_live_mode(self, kwargs):
         """Initialize live trading with proper dependency checking"""
         
-        # Try to import Angel One libraries
-        if not try_import_angel_one():
-            print("\n❌ LIVE TRADING SETUP REQUIRED:")
-            print("📦 Install Angel One libraries:")
-            print("   pip install smartapi-python pyotp")
-            print("\n💡 These are only needed for live trading")
-            print("📊 For backtesting, use mode='backtest' instead")
-            raise ImportError("Angel One libraries required for live trading. Install: pip install smartapi-python pyotp")
-        
+       
         # Get credentials
         self.api_key = kwargs.get('api_key', '')
         self.client_code = kwargs.get('client_code', '')
@@ -200,9 +186,7 @@ class WorkingUnifiedTrader:
     def _login_angel_one(self):
         """Login to Angel One with better error handling"""
         try:
-            if not HAS_ANGEL_ONE:
-                raise ImportError("Angel One libraries not available")
-            
+           
             # Generate TOTP
             totp = pyotp.TOTP(self.totp_secret).now()
             print(f"🔐 Generated TOTP: {totp}")
@@ -790,14 +774,7 @@ async def run_live():
     print("🔴 LIVE TRADING SETUP")
     print("=" * 50)
     
-    # Check Angel One libraries
-    if not try_import_angel_one():
-        print("❌ Live trading not available!")
-        print("\n📦 Required installations:")
-        print("   pip install smartapi-python pyotp")
-        print("\n💡 After installation, restart your terminal/IDE and try again")
-        input("\nPress Enter to continue...")
-        return
+
     
     try:
         print("🔐 Enter Angel One credentials:")
@@ -842,21 +819,11 @@ def display_menu():
     print(f"\n📦 Dependencies:")
     print(f"   NSEpy: {'✅ Available' if HAS_NSEPY else '❌ Missing (pip install nsepy)'}")
     
-    global HAS_ANGEL_ONE
-    if not HAS_ANGEL_ONE:
-        try_import_angel_one()  # Try again in case it was installed
-    
-    print(f"   Angel One: {'✅ Available' if HAS_ANGEL_ONE else '⚠️ Not installed (only for live trading)'}")
     
     print()
     print("1. 📊 Backtest (30 days)")
     print("2. ⚡ Quick Test (10 days)")
-    
-    if HAS_ANGEL_ONE:
-        print("3. 🔴 Live Trading")
-    else:
-        print("3. 🔴 Live Trading (Install: pip install smartapi-python pyotp)")
-    
+ 
     print("4. ❌ Exit")
     print()
     
@@ -982,9 +949,6 @@ if __name__ == "__main__":
                 sys.exit(1)
             asyncio.run(run_backtest())
         elif command == "live":
-            if not try_import_angel_one():
-                print("❌ Install Angel One libraries: pip install smartapi-python pyotp")
-                sys.exit(1)
             asyncio.run(run_live())
         else:
             print("Available commands:")
